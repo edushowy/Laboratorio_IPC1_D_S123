@@ -1,8 +1,8 @@
-# Laboratorio_IPC1-D-_S123
+# Laboratorio_IPC1_D_S123
 Presentaciones, Ejemplos (Java) y otros del laboratorio de IPC1 durante el 1er semestre del 2023
 
 # Tutor: José Eduardo Morales García
-¡¡ Bienvenido !!
+¡¡ Bienvenidos !!
 
 <image src="/imagenes/logo.png" alt="logo java">
 
