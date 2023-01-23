@@ -4,5 +4,5 @@ Presentaciones, Ejemplos (Java) y otros del laboratorio de IPC1 durante el 1er s
 # Tutor: José Eduardo Morales García
 ¡¡ Bienvenido !!
 
-<image src="/imagenes/logoJava.png" alt="logo java">
+<image src="/imagenes/logo.png" alt="logo java">
 
