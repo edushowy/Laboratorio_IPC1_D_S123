@@ -1,6 +1,6 @@
 # Correr ejemplos con NetBean 
 
-Clic en el menu Archivo (File) elegir la opcion Abrir archivo (Open File) elegimos el archivo que querramos
+Clic en el menu Archivo (File) elegir la opcion Abrir archivo (Open File) elegimos el archivo que queramos
 <br>
 <br>
 ![net1](/imagenes/1.png)
