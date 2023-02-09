@@ -21,6 +21,7 @@ public class Matriz {
     
     
     public static void main(String[] args) {
+        // repasando el funcionamiento
         // TODO code application logic here
         //for(int a=0; a<2;a++){
             //guardarDatos();
