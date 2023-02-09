@@ -19,6 +19,7 @@ public class Matriz {
     static String registro [][] = new String[5][3];
     static int indice = 0;
     
+    
     public static void main(String[] args) {
         // TODO code application logic here
         //for(int a=0; a<2;a++){
@@ -33,6 +34,19 @@ public class Matriz {
         //mostrarTodos();
         //int multiplicacion = devolverCarnet("luis") * 2;
         //System.out.println("resultado de multiplicar= "+multiplicacion);
+        
+        /*
+        String cadena ="";
+        Scanner xx = new Scanner(System.in);
+        cadena=xx.nextLine();
+        
+        System.out.println("la cadena tiene "+ cadena.length()+" caracteres");
+        if(cadena.length()<8 && cadena.length()>2 )
+            System.out.println("cumple");
+        else
+            System.out.println("No cumple");
+        */
+        
         String opc="0";
         do{
             menu();
@@ -131,7 +145,15 @@ public class Matriz {
         for(int fila=0; fila<5; fila++){
             // para que no explote solo tenemos que revisar que no sea null antes de compararlo
             if((registro[fila][0]!=null))
-                if(registro[fila][0].equals(nombre))                    
+                if(registro[fila][0].equals(nombre))
+                    /*
+                        cantidad total vendida esta en el la columna indice 2
+                        
+                        tomate Q5 0
+                        int actual = parseInt(registro[fila][2]);
+                        actual = actual+cantidad;
+                        registro[fila][2]=actual+"";                        
+                    */
                     return true;
         }
         return false;
@@ -155,18 +177,23 @@ public class Matriz {
         }
     }
     
+    //int descuento = devolverCarnet("A3AA");
+    
     public static int devolverCarnet(String nombre){
         for(int fila=0; fila<5; fila++){
             // para que no explote solo tenemos que revisar que no sea null antes de compararlo
             if((registro[fila][0]!=null))
                 if(registro[fila][0].equals(nombre))                    
-                    return parseInt(registro[fila][1]);            
+                    return parseInt(registro[fila][1]); 
+            
+            // andres 2021 19
         }
         return -1;
     }
     
     public static void ingresarVarios(){
-        int continuar=0;
+        //int continuar=0;
+        String continuar="0";
         
         do{
             guardarDatos();
@@ -175,9 +202,24 @@ public class Matriz {
             System.out.println("Desea ingresar otro estudiante");
             System.out.println("0 Si");
             System.out.println("1 No");
-            continuar= parseInt(entrada.nextLine());            
+            continuar = entrada.nextLine();
             
-        }while(continuar==0);
+            
+            // tomate   Q5
+            //cantidad se lee con scanner
+            //int cantidad=4;
+            //producto tomate
+            //int precio = devolverPrecio("tomate");
+            // subtotal = cantidad * precio
+            
+            //continuar= parseInt(entrada.nextLine()); 
+            //continuar= parseInt(registro[indice][2]) * descuento);
+            
+            // carrito[0][0] = precio+"";
+            // carrito[0][1] = subtotal+"";
+            
+        }while(continuar.equals("0"));
+        //while(continuar==0);
         
         
     }
