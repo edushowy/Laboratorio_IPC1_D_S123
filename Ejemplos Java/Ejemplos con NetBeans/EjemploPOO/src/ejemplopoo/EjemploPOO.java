@@ -6,6 +6,8 @@ package ejemplopoo;
 
 import ejemplopoo.elementos.Producto;
 import java.util.ArrayList;
+import ejemplopoo.ventanas.ventana;
+
 
 /**
  *
@@ -21,6 +23,11 @@ public class EjemploPOO {
     
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        ventana v = new ventana();
+        v.setVisible(true);       
+        
+        
         
         // agregamos al ArrayList 3 productos con la funcion .add que es de la Clase ArrayList
         listaProductos.add(new Producto("salsa",9.5));
