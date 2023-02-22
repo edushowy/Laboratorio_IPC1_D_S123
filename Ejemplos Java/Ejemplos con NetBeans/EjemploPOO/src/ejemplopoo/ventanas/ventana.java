@@ -6,10 +6,11 @@ package ejemplopoo.ventanas;
 
 import ejemplopoo.elementos.Producto;
 import java.awt.BorderLayout;
-import paneles.panelCupon;
-import paneles.panelLogin;
-import paneles.panelMostrarProductos;
-import paneles.panelProducto;
+import ejemplopoo.paneles.panelCupon;
+import ejemplopoo.paneles.panelLogin;
+import ejemplopoo.paneles.panelMostrarProductos;
+import ejemplopoo.paneles.panelProducto;
+import ejemplopoo.paneles.panelVentas;
 
 /**
  *
@@ -20,16 +21,17 @@ public class ventana extends javax.swing.JFrame {
     /**
      * Creates new form ventana2
      */
-    panelLogin log = new panelLogin();
-    panelProducto ppro = new panelProducto();
-    panelCupon pcup = new panelCupon();
-    panelMostrarProductos pmpro = new panelMostrarProductos();
+    private panelLogin log = new panelLogin();
+    private panelProducto ppro = new panelProducto();
+    private panelCupon pcup = new panelCupon();
+    private panelMostrarProductos pmpro = new panelMostrarProductos();
+    private panelVentas pv = new panelVentas();
     
     public ventana() {
         initComponents();        
         cambiarPanel(log);
         panelOpciones.setVisible(false);
-        this.setTitle("Edu 18/02/2023");
+        this.setTitle("Edu IPC1 D");
     }
     
     private void cambiarPanel(javax.swing.JPanel miPanel){
@@ -70,7 +72,7 @@ public class ventana extends javax.swing.JFrame {
         panelBase.setLayout(panelBaseLayout);
         panelBaseLayout.setHorizontalGroup(
             panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGap(0, 973, Short.MAX_VALUE)
         );
         panelBaseLayout.setVerticalGroup(
             panelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,13 +188,13 @@ public class ventana extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelAbajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,18 +225,24 @@ public class ventana extends javax.swing.JFrame {
 
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
         // TODO add your handling code here:
+        pv.setListaProductos(ppro.getListaProductos());
+        pv.crearListaDesplegable();
+        cambiarPanel(pv);
     }//GEN-LAST:event_ventasActionPerformed
 
     private void mostrarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarProductosActionPerformed
         // TODO add your handling code here:
-        String textoProductos="";
-        System.out.println("********** Productos en Stock **********");
+        String textoProductos="<html><head></head><body><table><tr><th>Nombre</th><th>Precio</th></tr>";
+        //System.out.println("********** Productos en Stock **********");
         for(int i=0; i<ppro.getListaProductos().size();i++){
             Producto temporal = new Producto();
             temporal = ppro.getListaProductos().get(i);
-            textoProductos = textoProductos+"Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio()+'\n';
-            System.out.println("Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio());
+            //textoProductos = textoProductos+"Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio()+'\n';
+            textoProductos = textoProductos+"<tr><td>"+temporal.getNombre()+"</td><td>"+temporal.getPrecio()+"</td></tr>";
+            //System.out.println("Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio());
         }
+        
+        textoProductos=textoProductos+"</table></body></html>";
         pmpro.setTextArea(textoProductos);
         cambiarPanel(pmpro);
     }//GEN-LAST:event_mostrarProductosActionPerformed
@@ -249,39 +257,7 @@ public class ventana extends javax.swing.JFrame {
         cambiarPanel(ppro);
     }//GEN-LAST:event_irAProductoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
-    /**
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ventana().setVisible(true);
-            }
-        });
-    }
-    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etiquetaError;

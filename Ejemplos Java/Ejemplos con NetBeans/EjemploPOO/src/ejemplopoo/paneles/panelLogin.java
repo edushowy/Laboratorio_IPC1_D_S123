@@ -2,24 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paneles;
+package ejemplopoo.paneles;
 
 /**
  *
  * @author edush
  */
 public class panelLogin extends javax.swing.JPanel {
-
     
-    private boolean usuarioValido = false;
-    
-    public void setUsuarioValido(boolean usuarioValido){
-        this.usuarioValido=usuarioValido;
-    }
-    
-    public boolean getUsuarioValido(){
-        return usuarioValido;
-    }
     /**
      * Creates new form login
      */

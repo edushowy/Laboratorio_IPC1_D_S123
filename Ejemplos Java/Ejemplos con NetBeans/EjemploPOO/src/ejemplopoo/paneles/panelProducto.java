@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package paneles;
+package ejemplopoo.paneles;
 
 import ejemplopoo.elementos.Producto;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -100,14 +101,25 @@ public class panelProducto extends javax.swing.JPanel {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-        System.out.println("-------------------- Cupon Descuento --------------------");
-        System.out.println("Codigo: "+nombre.getText()+" -> % Descuento: "+precio.getText());
-        System.out.println("Producto registrado exitosamente");
+        //System.out.println("-------------------- Cupon Descuento --------------------");
+        //System.out.println("Codigo: "+nombre.getText()+" -> % Descuento: "+precio.getText());
+        //System.out.println("Producto registrado exitosamente");
         
-        listaProductos.add(new Producto(nombre.getText(), Double.parseDouble(precio.getText())));
+        try{
+            listaProductos.add(new Producto(nombre.getText(), Double.parseDouble(precio.getText())));
         
-        nombre.setText("");
-        precio.setText("");
+            nombre.setText("");
+            precio.setText("");
+            precio.setBackground(Color.white);
+            precio.setForeground(Color.black);
+            
+        }catch(java.lang.NumberFormatException trono){
+            precio.setText("0");
+            precio.setBackground(Color.red);
+            precio.setForeground(Color.white);
+        }
+        
+        
     }//GEN-LAST:event_agregarActionPerformed
 
 

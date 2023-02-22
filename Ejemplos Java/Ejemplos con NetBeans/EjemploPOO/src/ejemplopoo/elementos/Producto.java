@@ -49,29 +49,5 @@ public class Producto {
         pro=new Producto("no trono :3",5);
         return pro;
     }
-    
-    
-    /*
-        Index of por defecto utiliza el comparador == por eso puede comprar la cadena con el nombre
-        debemos sobre escribir el metodo con .equals para que funcione correctamente
-    
-        las dos fuciones que estan abajo corrigen el problema
-    
-        NO recomiendo hacer esto en su proyecto lo agrego para sepan porque no funciono y
-        como solucionarlo
-    */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Producto producto = (Producto) o;
-        return Double.compare(producto.precio, precio) == 0                
-                && nombre.equals(producto.nombre);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre, precio);
-    }
-    
+        
 }
