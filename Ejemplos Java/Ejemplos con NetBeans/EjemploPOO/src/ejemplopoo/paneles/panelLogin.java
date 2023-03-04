@@ -84,6 +84,11 @@ public class panelLogin extends javax.swing.JPanel {
         return new String(password);
     }
     
+    public void resetearCampos(){
+        usuario.setText("");
+        clave.setText("");
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField clave;

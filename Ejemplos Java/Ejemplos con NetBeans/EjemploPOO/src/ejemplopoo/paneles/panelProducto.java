@@ -57,17 +57,22 @@ public class panelProducto extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(nombre)
-                    .addComponent(jLabel3)
-                    .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
-                .addComponent(agregar)
-                .addGap(141, 141, 141))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 129, Short.MAX_VALUE)
+                        .addComponent(agregar)
+                        .addGap(141, 141, 141))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nombre)
+                                .addComponent(jLabel3)
+                                .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,13 +105,12 @@ public class panelProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-        //System.out.println("-------------------- Cupon Descuento --------------------");
-        //System.out.println("Codigo: "+nombre.getText()+" -> % Descuento: "+precio.getText());
-        //System.out.println("Producto registrado exitosamente");
-        
+                
         try{
-            listaProductos.add(new Producto(nombre.getText(), Double.parseDouble(precio.getText())));
+            String nom =nombre.getText();
+            String pre = precio.getText();
+            double prec = Double.parseDouble(pre);
+            listaProductos.add(new Producto(nom, prec));
         
             nombre.setText("");
             precio.setText("");
@@ -122,8 +126,11 @@ public class panelProducto extends javax.swing.JPanel {
         
     }//GEN-LAST:event_agregarActionPerformed
 
+    public ArrayList<Producto> getListaProductos() {
+        return listaProductos;
+    }
 
-   ArrayList <Producto> listaProductos = new ArrayList<Producto>();
+   private ArrayList <Producto> listaProductos = new ArrayList<Producto>();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
@@ -134,8 +141,5 @@ public class panelProducto extends javax.swing.JPanel {
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
     // End of variables declaration//GEN-END:variables
-
-    public ArrayList<Producto> getListaProductos() {
-        return listaProductos;
-    }
+   
 }

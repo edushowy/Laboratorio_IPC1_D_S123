@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Producto {
     private String nombre;
     private double precio;
-    private Producto pro;
+    
     
     public Producto(){
         nombre="";
@@ -45,9 +45,6 @@ public class Producto {
         this.precio=precio;
     }
     
-    public Producto getProducto(){
-        pro=new Producto("no trono :3",5);
-        return pro;
-    }
+    
         
 }

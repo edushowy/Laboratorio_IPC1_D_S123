@@ -4,13 +4,16 @@
  */
 package ejemplopoo.ventanas;
 
+import ejemplopoo.elementos.Cuenta;
 import ejemplopoo.elementos.Producto;
+import ejemplopoo.paneles.panelCuenta;
 import java.awt.BorderLayout;
 import ejemplopoo.paneles.panelCupon;
 import ejemplopoo.paneles.panelLogin;
 import ejemplopoo.paneles.panelMostrarProductos;
 import ejemplopoo.paneles.panelProducto;
 import ejemplopoo.paneles.panelVentas;
+import ejemplopoo.paneles.prueba;
 
 /**
  *
@@ -26,6 +29,9 @@ public class ventana extends javax.swing.JFrame {
     private panelCupon pcup = new panelCupon();
     private panelMostrarProductos pmpro = new panelMostrarProductos();
     private panelVentas pv = new panelVentas();
+    private panelCuenta pcue = new panelCuenta();
+    private String rutaFotoActual = "";
+    private prueba pru = new prueba();
     
     public ventana() {
         initComponents();        
@@ -35,10 +41,10 @@ public class ventana extends javax.swing.JFrame {
     }
     
     private void cambiarPanel(javax.swing.JPanel miPanel){
-        miPanel.setSize(680,320);
+        miPanel.setSize(720,380);
         miPanel.setLocation(0,0);        
         panelBase.removeAll();
-        panelBase.add(miPanel, BorderLayout.CENTER);
+        panelBase.add(miPanel);
         panelBase.revalidate();
         panelBase.repaint();
     }
@@ -63,6 +69,8 @@ public class ventana extends javax.swing.JFrame {
         irADescuento = new javax.swing.JButton();
         ventas = new javax.swing.JButton();
         reportes = new javax.swing.JButton();
+        irACuenta = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +152,25 @@ public class ventana extends javax.swing.JFrame {
         });
 
         reportes.setText("Generar Reportes");
+        reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportesActionPerformed(evt);
+            }
+        });
+
+        irACuenta.setText("Mi Cuenta");
+        irACuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irACuentaActionPerformed(evt);
+            }
+        });
+
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelOpcionesLayout = new javax.swing.GroupLayout(panelOpciones);
         panelOpciones.setLayout(panelOpcionesLayout);
@@ -159,9 +186,13 @@ public class ventana extends javax.swing.JFrame {
                     .addGroup(panelOpcionesLayout.createSequentialGroup()
                         .addComponent(mostrarProductos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(irACuenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ventas))
                     .addGroup(panelOpcionesLayout.createSequentialGroup()
                         .addComponent(mostrarCodigos)
+                        .addGap(18, 18, 18)
+                        .addComponent(salir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(reportes)))
                 .addContainerGap())
@@ -173,12 +204,14 @@ public class ventana extends javax.swing.JFrame {
                 .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(irAProducto)
                     .addComponent(mostrarProductos)
-                    .addComponent(ventas))
+                    .addComponent(ventas)
+                    .addComponent(irACuenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(irADescuento)
                     .addComponent(mostrarCodigos)
-                    .addComponent(reportes))
+                    .addComponent(reportes)
+                    .addComponent(salir))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -194,7 +227,7 @@ public class ventana extends javax.swing.JFrame {
                         .addComponent(panelAbajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,14 +246,25 @@ public class ventana extends javax.swing.JFrame {
 
     private void ingresologinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresologinActionPerformed
         // TODO add your handling code here:
-        if(log.getUsuario().equals("2023") && log.getClave().equals("2023")){
-            cambiarPanel(ppro);
-            panelAbajo.setVisible(false);
-            panelOpciones.setVisible(true);
-        }else{
-            etiquetaError.setText("Usuario o Clave incorrectas, intente nuevamente");
-        }       
-               
+        
+        for(int i=0; i<pcue.getListaCuentas().size(); i++){
+            Cuenta temporal = new Cuenta();
+            temporal = pcue.getListaCuentas().get(i);
+            
+            if(log.getUsuario().equals(temporal.getUsuario()) && log.getClave().equals(temporal.getContraseña())){
+                rutaFotoActual=temporal.getRutaFoto();                
+                log.resetearCampos();
+                cambiarPanel(ppro);
+                panelAbajo.setVisible(false);
+                panelOpciones.setVisible(true);
+                etiquetaError.setText("...");
+                break;
+            }else{
+                etiquetaError.setText("Usuario o Clave incorrectas, intente nuevamente");
+            }            
+        }
+        
+                      
     }//GEN-LAST:event_ingresologinActionPerformed
 
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
@@ -232,17 +276,15 @@ public class ventana extends javax.swing.JFrame {
 
     private void mostrarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarProductosActionPerformed
         // TODO add your handling code here:
-        String textoProductos="<html><head></head><body><table><tr><th>Nombre</th><th>Precio</th></tr>";
-        //System.out.println("********** Productos en Stock **********");
+        String textoProductos="<html><head></head><body><table><tr><th>Nombre</th><th>Precio</th></tr>";        
         for(int i=0; i<ppro.getListaProductos().size();i++){
             Producto temporal = new Producto();
-            temporal = ppro.getListaProductos().get(i);
-            //textoProductos = textoProductos+"Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio()+'\n';
-            textoProductos = textoProductos+"<tr><td>"+temporal.getNombre()+"</td><td>"+temporal.getPrecio()+"</td></tr>";
-            //System.out.println("Producto: "+temporal.getNombre()+" -> Precio: "+temporal.getPrecio());
+            temporal = ppro.getListaProductos().get(i);            
+            textoProductos = textoProductos+"<tr><td>"+temporal.getNombre()+"</td><td>"+temporal.getPrecio()+"</td></tr>";            
         }
         
         textoProductos=textoProductos+"</table></body></html>";
+        
         pmpro.setTextArea(textoProductos);
         cambiarPanel(pmpro);
     }//GEN-LAST:event_mostrarProductosActionPerformed
@@ -257,11 +299,30 @@ public class ventana extends javax.swing.JFrame {
         cambiarPanel(ppro);
     }//GEN-LAST:event_irAProductoActionPerformed
 
+    private void irACuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irACuentaActionPerformed
+        // TODO add your handling code here:        
+        cambiarPanel(pcue);
+        pcue.fotoActual(rutaFotoActual);        
+    }//GEN-LAST:event_irACuentaActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        // TODO add your handling code here:
+        cambiarPanel(log);
+        panelAbajo.setVisible(true);
+        panelOpciones.setVisible(false);
+    }//GEN-LAST:event_salirActionPerformed
+
+    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        // TODO add your handling code here:
+        cambiarPanel(pru);
+    }//GEN-LAST:event_reportesActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etiquetaError;
     private javax.swing.JButton ingresologin;
+    private javax.swing.JButton irACuenta;
     private javax.swing.JButton irADescuento;
     private javax.swing.JButton irAProducto;
     private javax.swing.JButton mostrarCodigos;
@@ -270,6 +331,7 @@ public class ventana extends javax.swing.JFrame {
     private javax.swing.JPanel panelBase;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JButton reportes;
+    private javax.swing.JButton salir;
     private javax.swing.JButton ventas;
     // End of variables declaration//GEN-END:variables
 }
