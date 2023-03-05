@@ -26,52 +26,45 @@ public class prueba extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        combo = new javax.swing.JComboBox<>();
-        contenidoCombo = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        mensaje = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 204, 255));
 
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("informacion de region");
 
-        contenidoCombo.setText("imprimir combo");
-        contenidoCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contenidoComboActionPerformed(evt);
-            }
-        });
+        mensaje.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contenidoCombo)
-                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(mensaje)
+                    .addComponent(jLabel1))
+                .addGap(14, 265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(contenidoCombo)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addGap(57, 57, 57)
+                .addComponent(mensaje)
+                .addContainerGap(187, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void contenidoComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contenidoComboActionPerformed
-        // TODO add your handling code here:
-        String com = combo.getSelectedItem().toString();
-        System.out.println("-> "+com);
-        
-    }//GEN-LAST:event_contenidoComboActionPerformed
-
+    public void setNorte(String informacion){
+        mensaje.setText("");
+        mensaje.setText(informacion);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> combo;
-    private javax.swing.JButton contenidoCombo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel mensaje;
     // End of variables declaration//GEN-END:variables
 }

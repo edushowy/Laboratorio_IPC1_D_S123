@@ -27,7 +27,7 @@ public class panelCuenta extends javax.swing.JPanel {
         initComponents();
         rutaImagenDefecto=getClass().getResource("/img/fotoDefault.png").toString();
         rutaImagenDefecto=rutaImagenDefecto.replace("file:/", "");        
-        listaCuentas.add(new Cuenta("Eduardo", "Garcia", "2023",rutaImagenDefecto, "2023"));
+        listaCuentas.add(new Cuenta("Eduardo", "Garcia", "2023",rutaImagenDefecto, "2023",true));
         fotoActual(rutaImagenDefecto.toString());
         this.revalidate();
         this.repaint();
@@ -243,7 +243,7 @@ public class panelCuenta extends javax.swing.JPanel {
         
         if(nueva.equals(revalidar) && !nueva.equals("") && !revalidar.equals("")){
             contrasenia = nueva;
-            listaCuentas.add(new Cuenta(nombres.getText(), apellidos.getText(), contrasenia, rutaFoto, usuario.getText()));
+            listaCuentas.add(new Cuenta(nombres.getText(), apellidos.getText(), contrasenia, rutaFoto, usuario.getText(),false));
             
             JOptionPane.showConfirmDialog(this, "Se a agregado al usuario:  "+usuario.getText(), "Confirmar acción", JOptionPane.DEFAULT_OPTION);
             

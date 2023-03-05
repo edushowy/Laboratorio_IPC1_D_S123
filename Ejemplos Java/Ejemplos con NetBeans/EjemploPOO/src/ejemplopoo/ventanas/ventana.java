@@ -6,12 +6,14 @@ package ejemplopoo.ventanas;
 
 import ejemplopoo.elementos.Cuenta;
 import ejemplopoo.elementos.Producto;
+import ejemplopoo.elementos.Region;
 import ejemplopoo.paneles.panelCuenta;
 import java.awt.BorderLayout;
 import ejemplopoo.paneles.panelCupon;
 import ejemplopoo.paneles.panelLogin;
 import ejemplopoo.paneles.panelMostrarProductos;
 import ejemplopoo.paneles.panelProducto;
+import ejemplopoo.paneles.panelRegion;
 import ejemplopoo.paneles.panelVentas;
 import ejemplopoo.paneles.prueba;
 
@@ -32,12 +34,19 @@ public class ventana extends javax.swing.JFrame {
     private panelCuenta pcue = new panelCuenta();
     private String rutaFotoActual = "";
     private prueba pru = new prueba();
+    private panelRegion pare = new panelRegion();
+    
+    // regiones
+    private Region regionNorte = new Region("Norte","(N)",5,10);
+    private Region regionSur = new Region("Sur","(S)",7,14);
+    private Region regionEste = new Region("Este","(E)",4.5,11.25);
     
     public ventana() {
         initComponents();        
         cambiarPanel(log);
         panelOpciones.setVisible(false);
         this.setTitle("Edu IPC1 D");
+        pare.setRegiones(regionNorte, regionSur, regionEste);
     }
     
     private void cambiarPanel(javax.swing.JPanel miPanel){
@@ -129,6 +138,11 @@ public class ventana extends javax.swing.JFrame {
         });
 
         mostrarCodigos.setText("Mostrar Codigos");
+        mostrarCodigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarCodigosActionPerformed(evt);
+            }
+        });
 
         irAProducto.setText("Volver a Producto");
         irAProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -252,13 +266,19 @@ public class ventana extends javax.swing.JFrame {
             temporal = pcue.getListaCuentas().get(i);
             
             if(log.getUsuario().equals(temporal.getUsuario()) && log.getClave().equals(temporal.getContraseña())){
-                rutaFotoActual=temporal.getRutaFoto();                
-                log.resetearCampos();
-                cambiarPanel(ppro);
-                panelAbajo.setVisible(false);
-                panelOpciones.setVisible(true);
-                etiquetaError.setText("...");
-                break;
+                if(temporal.getEsAdmin()){
+                    // panen para admin
+                    rutaFotoActual=temporal.getRutaFoto();                
+                    log.resetearCampos();
+                    cambiarPanel(ppro);
+                    panelAbajo.setVisible(false);
+                    panelOpciones.setVisible(true);
+                    etiquetaError.setText("...");
+                    break;
+                }else{
+                    // panel usuario
+                    System.out.println("usuario normal");
+                }                
             }else{
                 etiquetaError.setText("Usuario o Clave incorrectas, intente nuevamente");
             }            
@@ -314,8 +334,15 @@ public class ventana extends javax.swing.JFrame {
 
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
         // TODO add your handling code here:
-        cambiarPanel(pru);
+        cambiarPanel(pare);
     }//GEN-LAST:event_reportesActionPerformed
+
+    private void mostrarCodigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCodigosActionPerformed
+        // TODO add your handling code here:
+        regionNorte = pare.getNorte();
+        pru.setNorte("Nombre: "+regionNorte.getNombre()+" Codigo: "+regionNorte.getCodigo()+" Precio Estandar: "+regionNorte.getPrecioEstandar()+" Precio Especial: "+regionNorte.getPrecioEspecial());
+        cambiarPanel(pru);
+    }//GEN-LAST:event_mostrarCodigosActionPerformed
 
     
 

@@ -14,16 +14,18 @@ public class Cuenta {
     private String contraseña;
     private String rutaFoto;
     private String usuario;
+    private boolean esAdmin ;
 
     public Cuenta() {
     }
 
-    public Cuenta(String nombres, String apellidos, String contraseña, String rutaFoto, String usuario) {
+    public Cuenta(String nombres, String apellidos, String contraseña, String rutaFoto, String usuario, boolean esAdmin) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.contraseña = contraseña;
         this.rutaFoto = rutaFoto;
         this.usuario = usuario;
+        this.esAdmin = esAdmin;
     }
 
     public String getNombres() {
@@ -64,6 +66,10 @@ public class Cuenta {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+    
+    public boolean getEsAdmin(){
+        return esAdmin;
     }
 
     
