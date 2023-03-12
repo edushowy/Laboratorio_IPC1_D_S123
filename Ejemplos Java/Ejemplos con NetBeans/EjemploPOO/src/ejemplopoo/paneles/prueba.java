@@ -3,6 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ejemplopoo.paneles;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  *
@@ -26,8 +37,20 @@ public class prueba extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jLabel1 = new javax.swing.JLabel();
         mensaje = new javax.swing.JLabel();
+        botonPDF = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        texto = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        html = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        contenidoHtml = new javax.swing.JEditorPane();
+        imprimir = new javax.swing.JButton();
+
+        jScrollPane3.setViewportView(jEditorPane1);
 
         setBackground(new java.awt.Color(102, 204, 255));
 
@@ -36,35 +59,170 @@ public class prueba extends javax.swing.JPanel {
 
         mensaje.setText("...");
 
+        botonPDF.setText("PDF");
+        botonPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPDFActionPerformed(evt);
+            }
+        });
+
+        texto.setColumns(20);
+        texto.setRows(5);
+        jScrollPane1.setViewportView(texto);
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Contenido del archivo PDF");
+
+        html.setText("HTML");
+        html.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                htmlActionPerformed(evt);
+            }
+        });
+
+        contenidoHtml.setContentType("text/html"); // NOI18N
+        jScrollPane4.setViewportView(contenidoHtml);
+        contenidoHtml.getAccessibleContext().setAccessibleDescription("text/html");
+
+        imprimir.setText("Imprimir");
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mensaje)
-                    .addComponent(jLabel1))
-                .addGap(14, 265, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(html)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonPDF)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(mensaje)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(57, 57, 57)
-                .addComponent(mensaje)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(mensaje))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(html)
+                    .addComponent(imprimir)
+                    .addComponent(botonPDF))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPDFActionPerformed
+        // TODO add your handling code here: 
+        JFileChooser selector = new JFileChooser();
+        selector.setDialogTitle("Guardar archivo PDF");
+        int resultado = selector.showSaveDialog(null);
+        //System.out.println("constante"+JFileChooser.APPROVE_OPTION);
+        //System.out.println("leido"+resultado);
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivo = selector.getSelectedFile();
+            String nombreArchivo = archivo.getName();
+            if (!nombreArchivo.endsWith(".pdf")) {
+                archivo = new File(archivo.getParentFile(), nombreArchivo + ".pdf");
+            }
+            try {
+                PDDocument documento = new PDDocument();
+                PDPage pagina = new PDPage();
+                documento.addPage(pagina);
+                PDPageContentStream contenido = new PDPageContentStream(documento, pagina);
+                contenido.beginText();
+                contenido.setFont(PDType1Font.TIMES_ROMAN, 12);
+                contenido.newLineAtOffset(25, 700);
+                
+                String contenidoTexto = texto.getText(); // obtener el texto del JTextArea
+                String[] lineas = contenidoTexto.split("\\n"); // separar el texto por saltos de línea
+                int y = 700; // posición de inicio en y
+                
+                for (String linea : lineas) {
+                    contenido.newLineAtOffset(0, -20); // bajar 20 unidades en y
+                    contenido.showText(linea);                
+                }
+                
+                contenido.endText();
+                contenido.close();
+                documento.save(archivo);
+                documento.close();
+                JOptionPane.showMessageDialog(null, "El archivo se ha guardado correctamente.");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el archivo.");
+            }
+        }
+    }//GEN-LAST:event_botonPDFActionPerformed
+
+    private void htmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlActionPerformed
+        // TODO add your handling code here:
+        URL url=getClass().getResource("/img/Foto3.png");        
+        String codigoHtml = "<html><body>"
+                + "<h1>Guia</h1>"
+                + "<img src=" + url + " width=100 height=100></img>"
+                + "<p> Esto es un texto </p>"
+                + "</body></html>";
+        contenidoHtml.setText(codigoHtml);
+    }//GEN-LAST:event_htmlActionPerformed
+
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+        // TODO add your handling code here:                       
+        try {
+           contenidoHtml.print();
+        } catch (Exception ex) {
+             System.out.println("x.x");
+        }
+    }//GEN-LAST:event_imprimirActionPerformed
+
+    
+    
     public void setNorte(String informacion){
         mensaje.setText("");
-        mensaje.setText(informacion);
+        mensaje.setText(informacion);        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonPDF;
+    private javax.swing.JEditorPane contenidoHtml;
+    private javax.swing.JButton html;
+    private javax.swing.JButton imprimir;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel mensaje;
+    private javax.swing.JTextArea texto;
     // End of variables declaration//GEN-END:variables
 }
